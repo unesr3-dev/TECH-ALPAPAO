@@ -178,10 +178,10 @@
 
           <!-- WhatsApp Form Phone Number -->
           <div class="pt-2">
-            <label class="block text-xs text-slate-400 font-medium mb-1">Número de WhatsApp receptor (opcional):</label>
+            <label class="block text-xs text-slate-400 font-medium mb-1">Número de WhatsApp receptor:</label>
             <div class="relative">
               <i class="fa-brands fa-whatsapp absolute left-3 top-1/2 -translate-y-1/2 text-emerald-400"></i>
-              <input type="text" id="phoneInput" placeholder="Ej: +584121234567" class="w-full bg-slate-900 border border-slate-800 text-slate-200 text-xs rounded-lg pl-9 pr-3 py-2 focus:outline-none focus:border-emerald-500">
+              <input type="text" id="phoneInput" value="+584264014765" class="w-full bg-slate-900 border border-slate-800 text-slate-200 text-xs rounded-lg pl-9 pr-3 py-2 focus:outline-none focus:border-emerald-500">
             </div>
           </div>
 
@@ -684,14 +684,13 @@
       message += `💳 *Métodos de pago:* Zelle, USDT, Pago Móvil / Transferencia Bs.`;
 
       const encodedMessage = encodeURIComponent(message);
-      const customPhone = document.getElementById("phoneInput").value.trim().replace(/\+/g, '').replace(/\s/g, '');
       
-      let whatsappUrl = "";
-      if (customPhone) {
-        whatsappUrl = `https://wa.me/${customPhone}?text=${encodedMessage}`;
-      } else {
-        whatsappUrl = `https://api.whatsapp.com/send?text=${encodedMessage}`;
-      }
+      // Obtiene el número ingresado o usa el predeterminado
+      let phoneInputVal = document.getElementById("phoneInput").value.trim().replace(/\+/g, '').replace(/\s/g, '');
+      const defaultPhone = "584264014765";
+      const targetPhone = phoneInputVal || defaultPhone;
+
+      const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodedMessage}`;
 
       window.open(whatsappUrl, '_blank');
     }
